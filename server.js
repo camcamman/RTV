@@ -8,7 +8,6 @@ app.use(express.json())
 app.use("/comments", require("./routes/commentsRouter"))
 app.use("/issue", require("./routes/issueRouter"))
 app.use("/user", require("./routes/userRouter"))
-// app.use("/tvShows", require("./routes/tvShowsRouter"))
 
 //main err handling 
 app.use((err, req, res, next) => {
