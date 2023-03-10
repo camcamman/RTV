@@ -13,7 +13,7 @@ const commentsDb = require("../models/CommentsRouter")
 
 //get all 
 commentsRouter.get("/", async (req, res, next)=> {
-    var stuff = await commentsDb.find({}).exec()
+    const stuff = await commentsDb.find({}).exec()
     return res.status(202).send(stuff);
     // await commentsDb.find((err, stuff) => {
     //     if (err) {
@@ -25,52 +25,60 @@ commentsRouter.get("/", async (req, res, next)=> {
 })
 
 //get one 
-commentsRouter.get("/:commentsId", (req, res, next) => {
+commentsRouter.get("/:commentsId", async (req, res, next) => {
     const id = req.params.commentsId
-    commentsDb.findOne({id: id}, (err, foundmovie) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }
-        return res.status(200).send(foundmovie)
-    })
+    const foundComment = await commentsDb.findOne({}).exec()
+    return foundComment
+    // commentsDb.findOne({id: id}, (err, foundComment) => {
+    //     if (err) {
+    //         res.status(500).send(err)
+    //         return next (err)
+    //     }
+    //     return res.status(200).send(foundComment)
+    // })
 })
 
 //add one 
-commentsRouter.post("/", (req, res, next) => {
+commentsRouter.post("/", async (req, res, next) => {
     const newComment = new commentsDb(req.body)
-    commentsDb.save((err, addedMovie) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }
-        return res.status(201).send(addedMovie )
-    })
+    const addedComment = await commentsDb.save({}).exec()
+    return addedComment
+    // commentsDb.save((err, addedComment) => {
+    //     if (err) {
+    //         res.status(500).send(err)
+    //         return next (err)
+    //     }
+    //     return res.status(201).send(addedComment )
+    // })
 })
 
 //delete one 
-commentsRouter.delete("/:commentsId", (req, res) => {
+commentsRouter.delete("/:commentsId", async (req, res) => {
     const id = req.params.commentsId
-    commentsDb.findOneAndDelete({id: id}, (err, deletedMovie) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }  
-        return res.status(200).send("deleted Movie")
-    })
+    const deletedComment = await commentsDb.findOneAndDelete({}).exec()
+    return deletedComment 
+    // commentsDb.findOneAndDelete({id: id}, (err, deletedComment) => {
+    //     if (err) {
+    //         res.status(500).send(err)
+    //         return next (err)
+    //     }  
+    //     return res.status(200).send("deleted Comment")
+    // })
 })
 
 //edit One 
-commentsRouter.put("/:commentsId", (req, res) => {
+commentsRouter.put("/:commentsId", async (req, res) => {
     const id = req.params.commentsId
     const newComment = req.body
-    commentsDb.findOneAndUpdate({id: id}, newComment, (err, updatedMovie) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }
-        return res.status(201).send(updatedMovie)
-    })
+    const updatedComment = await commentsDb.findOneAndUpdate({})
+    return updatedComment
+    // commentsDb.findOneAndUpdate({id: id}, newComment, (err, updatedComment) => {
+    //     if (err) {
+    //         res.status(500).send(err)
+    //         return next (err)
+    //     }
+    //     return res.status(201).send(updatedComment)
+    // })
 })
 
 
