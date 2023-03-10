@@ -1,14 +1,16 @@
 const express = require("express")
 const userRouter = express.Router()
 const mongoose = require("mongoose")
-const user = require("../models/User")
-const UserDb = require("../routes/userRouter")
+const user = require("../models/UserRouter")
+const UserDb = require("../models/UserRouter")
 
 //set up mongoose 
-mongoose.set("strictQuery", false);
-mongoose.connect('mongodb://127.0.0.1:27017/bountyDB',
-{useNewUrlParser: true},
-(msg) => console.log(msg ? msg : "connected to DB"));
+// mongoose.set("strictQuery", false);
+// mongoose.connect('mongodb://127.0.0.1:27017/bountyDB',
+// {useNewUrlParser: true},
+// (msg) => console.log(msg ? msg : "connected to DB"));
+
+// mongoose.connect('mongodb://127.0.0.1:27017/RTV'). catch (error => console.log(error)). then (() => console.log("connected to db"));
 
 //get all 
 userRouter.get("/", (req, res, next)=> {

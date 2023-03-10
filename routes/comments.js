@@ -1,24 +1,27 @@
-const express = require("express")
+const express = require(`express`)
 const commentsRouter = express.Router()
 const mongoose = require("mongoose")
-const comments = require("../models/Comments")
-const commentsDb = require("../routes/commentsRouter")
+const commentsDb = require("../models/CommentsRouter")
 
 //set up mongoose 
-mongoose.set("strictQuery", false);
-mongoose.connect('mongodb://127.0.0.1:27017/RTV',
-{useNewUrlParser: true},
-(msg) => console.log(msg ? msg : "connected to DB"));
+// mongoose.set("strictQuery", false);
+// mongoose.connect('mongodb://127.0.0.1:27017/RTV',
+// {useNewUrlParser: true},
+// (msg) => console.log(msg ? msg : "connected to DB"));
+
+// mongoose.connect('mongodb://127.0.0.1:27017/RTV'). catch (error => console.log(error));
 
 //get all 
-commentsRouter.get("/", (req, res, next)=> {
-    commentsDb.find((err, stuff) => {
-        if (err) {
-            res.status(500).send(err)
-            return next.err
-        }
-        return res.status(200).send(stuff)
-    })
+commentsRouter.get("/", async (req, res, next)=> {
+    var stuff = await commentsDb.find({}).exec()
+    return res.status(202).send(stuff);
+    // await commentsDb.find((err, stuff) => {
+    //     if (err) {
+    //         res.status(500).send(err)
+    //         return next (err)
+    //     }
+    //     return res.status(200).send(stuff)
+    // })
 })
 
 //get one 

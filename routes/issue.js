@@ -1,14 +1,16 @@
 const express = require("express")
 const issueRouter = express.Router()
 const mongoose = require("mongoose")
-const movies = require("../models/Issue")
-const issueDb = require("../routes/issueRouter")
+const movies = require("../models/IssueRouter")
+const issueDb = require("../models/IssueRouter")
 
 //set up mongoose 
-mongoose.set("strictQuery", false);
-mongoose.connect('mongodb://127.0.0.1:27017/commentsDB',
-{useNewUrlParser: true},
-(msg) => console.log(msg ? msg : "connected to DB"));
+// mongoose.set("strictQuery", false);
+// mongoose.connect('mongodb://127.0.0.1:27017/commentsDB',
+// {useNewUrlParser: true},
+// (msg) => console.log(msg ? msg : "connected to DB"));
+
+// mongoose.connect('mongodb://127.0.0.1:27017/RTV'). catch (error => console.log(error));
 
 //get all 
 issueRouter.get("/", (req, res, next)=> {
