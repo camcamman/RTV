@@ -7,31 +7,31 @@ const UserDb = require("../models/UserRouter")
 //get all 
 userRouter.get("/", async (req, res, next)=> {
     const userThing = await UserDb.find({}).exec()
-    return userThing
+    return res.status(200).send(userThing)
 })
 
 //get one 
 userRouter.get("/:userId", async (req, res, next) => {
     const userThing = await UserDb.findOnefind({}).exec()
-    return userThing
+    return res.status(200).send(userThing)
 })
 
 //add one 
 userRouter.post("/", async (req, res, next) => {
     const userThing = await UserDb.savefind({}).exec()
-    return userThing
+    return res.status(200).send(userThing)
 })
 
 //delete one 
 userRouter.delete("/:userId", async (req, res) => {
     const userThing = await UserDb.findOneAndDeletefind({}).exec()
-    return userThing
+    return res.status(200).send(userThing)
 })
 
 //edit One 
 userRouter.put("/:userId", async (req, res) => {
     const userThing = await UserDb.findOneAndUpdatefind({}).exec()
-    return userThing
+    return res.status(200).send(userThing)
 })
 
 
