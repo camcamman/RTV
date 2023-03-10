@@ -4,72 +4,34 @@ const mongoose = require("mongoose")
 const user = require("../models/UserRouter")
 const UserDb = require("../models/UserRouter")
 
-//set up mongoose 
-// mongoose.set("strictQuery", false);
-// mongoose.connect('mongodb://127.0.0.1:27017/bountyDB',
-// {useNewUrlParser: true},
-// (msg) => console.log(msg ? msg : "connected to DB"));
-
-// mongoose.connect('mongodb://127.0.0.1:27017/RTV'). catch (error => console.log(error)). then (() => console.log("connected to db"));
-
 //get all 
-userRouter.get("/", (req, res, next)=> {
-    UserDb.find((err, stuff) => {
-        if (err) {
-            res.status(500).send(err)
-            return next.err
-        }
-        return res.status(200).send(stuff)
-    })
+userRouter.get("/", async (req, res, next)=> {
+    const userThing = await UserDb.find({}).exec()
+    return userThing
 })
 
 //get one 
-userRouter.get("/:userId", (req, res, next) => {
-    const id = req.params.userId
-    UserDb.findOne({id: id}, (err, foundmovie) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }
-        return res.status(200).send(foundmovie)
-    })
+userRouter.get("/:userId", async (req, res, next) => {
+    const userThing = await UserDb.findOnefind({}).exec()
+    return userThing
 })
 
 //add one 
-userRouter.post("/", (req, res, next) => {
-    const newUser = new UserDb(req.body)
-    UserDb.save((err, addedMovie) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }
-        return res.status(201).send(addedMovie )
-    })
+userRouter.post("/", async (req, res, next) => {
+    const userThing = await UserDb.savefind({}).exec()
+    return userThing
 })
 
 //delete one 
-userRouter.delete("/:userId", (req, res) => {
-    const id = req.params.userId
-    UserDb.findOneAndDelete({id: id}, (err, deletedUser) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }  
-        return res.status(200).send("deleted User")
-    })
+userRouter.delete("/:userId", async (req, res) => {
+    const userThing = await UserDb.findOneAndDeletefind({}).exec()
+    return userThing
 })
 
 //edit One 
-userRouter.put("/:userId", (req, res) => {
-    const id = req.params.userId
-    const newUser = req.body
-    UserDb.findOneAndUpdate({id: id}, newUser, (err, updatedUser) => {
-        if (err) {
-            res.status(500).send(err)
-            return next (err)
-        }
-        return res.status(201).send(updatedUser)
-    })
+userRouter.put("/:userId", async (req, res) => {
+    const userThing = await UserDb.findOneAndUpdatefind({}).exec()
+    return userThing
 })
 
 
