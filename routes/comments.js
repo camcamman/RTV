@@ -5,7 +5,7 @@ const CommentDb = require("../models/CommentsRouter")
 
 //get all 
 commentsRouter.get("/", async (req, res, next)=> {
-    const stuff = await CommentDb.find({}).exec()
+    const stuff = await CommentDb.find().exec()
     return res.status(200).send(stuff);
 })
 
