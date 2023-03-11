@@ -1,36 +1,41 @@
 const express = require(`express`)
 const commentsRouter = express.Router()
 const mongoose = require("mongoose")
-const commentsDb = require("../models/CommentsRouter")
+const CommentDb = require("../models/CommentsRouter")
 
 //get all 
 commentsRouter.get("/", async (req, res, next)=> {
-    const stuff = await commentsDb.find({}).exec()
+    const stuff = await CommentDb.find({}).exec()
     return res.status(200).send(stuff);
 })
 
 //get one 
 commentsRouter.get("/:commentsId", async (req, res, next) => {
-    const foundComment = await commentsDb.findOne({}).exec()
+    const id = req.params.commentsId
+    const foundComment = await CommentDb.findById(id).exec();
     return res.status(200).send(foundComment)
 })
 
 //add one 
 commentsRouter.post("/", async (req, res, next) => {
-    const addedComment = await commentsDb.save({}).exec()
-    return res.status(200).send(addedComment)
+    const newComment = new CommentDb(req.body)
+    const result = await newComment.save()
+    return res.status(200).send(result)
 })
 
 //delete one 
 commentsRouter.delete("/:commentsId", async (req, res) => {
-    const deletedComment = await commentsDb.findOneAndDelete({}).exec()
-    return res.status(200).send(deletedComment)
+    const id = req.params.commentsId
+    const result = await CommentDb.findByIdAndRemove(id)
+    return res.status(200).send(result)
 })
 
 //edit One 
 commentsRouter.put("/:commentsId", async (req, res) => {
-    const updatedComment = await commentsDb.findOneAndUpdate({}).exec()
-    return res.status(200).send(updatedComment) 
+    const id = req.params.commentsId
+    const newComment = req.body
+    const updatedComment = await CommentDb.findByIdAndUpdate(id, newComment)
+    return res.status(200).send(updatedComment)
 })
 
 
