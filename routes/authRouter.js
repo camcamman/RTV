@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken')
 
 //signup
 authRouter.post("/signup", async (req, res, next) => {
-    const foundUsername = await User.findOne({ username: req.body.username.toLowerCase() }).exec()
+    const foundLogin = await User.findOne({ username: req.body.username.toLowerCase() }).exec()
 
-    if(foundUsername !== null){
+    if(foundLogin !== null){
         res.status(403)
         return next(new Error("That username is already taken"))
     }
@@ -21,5 +21,25 @@ authRouter.post("/signup", async (req, res, next) => {
     return res.status(201).send({ token, user: saveNewUser})
 })
 
+
+//login 
+authRouter.post("/login", async (req, res, next) => {
+    const foundLogin = await User.findOne({ username: req.body.username.toLowerCase() }).exec()
+    const foundPassword = await User.findOne({ password: req.body.password }).exec()
+
+    if (foundLogin === null ) {
+        res.status(403)
+        return next(new Error("Username or Password are incorrect"))
+    }
+
+    if(foundPassword === null){
+        res.status(403)
+        return next(new Error("Username or Password are incorrect"))
+    }
+
+    const token = jwt.sign(foundLogin.toObject(), process.env.SECRET)
+    
+    return res.status(200).send({ token, foundLogin })
+})
 
 module.exports = authRouter
