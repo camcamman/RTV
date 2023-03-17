@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Home from './Home'
+import Home from './components/Auth/Auth'
 
 export default function App(){
   return (
