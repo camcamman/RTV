@@ -13,18 +13,6 @@ export default function UserProvider (props) {
 
     const [userState, setUserState] = useState(initState)
 
-    // function signup (cred) {
-    //     axios.post("/auth/signup", cred)
-    //     // .then(res => console.log(res))
-    //     .then(res => console.log(res.data))
-    //     .catch(err => console.log(err))
-    //     // console.log(cred)
-    //     // await axios.get("/issue")
-    //     // .then(res => console.log(res))
-    //     // .catch(err => console.log(err))
-    //     // console.log(cred)
-    // }
-
     function handleAuthErr(errMsg){
         setUserState(prevUserState => ({
             ...prevUserState,
@@ -34,25 +22,54 @@ export default function UserProvider (props) {
 
     function signup(credentials){
         axios.post('/auth/signup', credentials)
-        // .then(res => {
-        //     const { user, token} = res.data
-        //     localStorage.setItem('token', token)
-        //     localStorage.setItem('user', JSON.stringify(user))
-        //     setUserState(prevUserState => ({
-        //         ...prevUserState,
-        //         user, token
-        //     }))
-        //     console.log(userState)
-        // })
-        .then(res => console.log(res.data))
+        .then(res => {
+            const { user, token} = res.data
+            localStorage.setItem('token', token)
+            localStorage.setItem('user', JSON.stringify(user))
+            setUserState(prevUserState => ({
+                ...prevUserState,
+                user, token
+            }))
+            console.log(userState)
+        })
+        // .then(res => console.log(res.data))
         .catch(err => handleAuthErr(err.response.data.errMsg))
     }
+
+    function login(credentials){
+        axios.post("/auth/login", credentials)
+          .then(res => {
+            const { user, token } = res.data
+            localStorage.setItem("token", token)
+            localStorage.setItem("user", JSON.stringify(user))
+            // getUserTodos()
+            setUserState(prevUserState => ({
+              ...prevUserState,
+              user,
+              token
+            }))
+            console.log(userState)
+          })
+          .catch(err => console.log(err.response.data.errMsg))
+      }
+
+    function logout(){
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        setUserState({
+          user: {},
+          token: "",
+          todos: []
+        })
+      }
 
     return(
         <userContext.Provider
         value={{
             ...userState,
-            signup
+            signup,
+            login,
+            logout
         }}>
             {props.children}
         </userContext.Provider>

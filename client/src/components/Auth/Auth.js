@@ -8,7 +8,10 @@ export default function Home () {
     const [inputs, setInputs] = useState(initInputs)
     const [toggle, setToggle] = useState(true)
 
-    const { signup } = useContext(userContext)
+    const {
+        signup,
+        login
+    } = useContext(userContext)
 
     function handleChange(e){
         const {name, value} = e.target
@@ -24,11 +27,13 @@ export default function Home () {
         signup(inputs)
     }
 
+    function handleLogin (e) {
+        e.preventDefault()
+        login(inputs)
+    }
+
     return(
         <div>
-            <form onSubmit={handleSignin}>
-                <button>test</button>
-            </form>
             {toggle ?
             <>
             <AuthForm
@@ -43,6 +48,9 @@ export default function Home () {
             <>
             <AuthForm
                 handleChange={handleChange}
+                handleSubmit={handleLogin}
+                inputs={inputs}
+                buttonText="Log In"
             />
           <button onClick={() => setToggle(prev => !prev)}>Not a member?</button>
 
