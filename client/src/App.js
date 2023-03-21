@@ -11,7 +11,7 @@ export default function App(){
       <Routes>
         <Route 
           path="/" 
-          element={ token ? <Navigate to="/profile"/> : <Home />}
+          element={ token ? <Navigate to="/PoliticalIssues"/> : <Home />}
           // element={<Home />}
         />
 
