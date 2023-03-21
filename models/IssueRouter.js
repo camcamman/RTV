@@ -2,9 +2,13 @@ const mongoos = require("mongoose")
 const Schema = mongoos.Schema
 
 const issueSchema = new Schema({
-    temp:{
+    issue:{
         type: String,
         required: true
+    },
+    user:{
+        type: String,
+        required: true 
     }
 })
 
