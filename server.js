@@ -1,12 +1,14 @@
-const mongoose = require("mongoose")
 const express = require("express")
-const morgon = require("morgan")
 const app = express()
-require('dotenv').config() 
+require('dotenv').config()
+
+const mongoose = require('mongoose')
+const {expressjwt} = require('express-jwt')
 const port = 8081
+const morgan = require('morgan')
 
 app.use(express.json())
-app.use(morgon('dev'))
+app.use(morgan('dev'))
 
 mongoose.set("strictQuery", false);
 
@@ -16,6 +18,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/RTVdb')
 
 //routes 
 app.use("/auth", require("./routes/authRouter"))
+app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256'] })) 
 app.use("/comments", require("./routes/comments"))
 app.use("/issue", require("./routes/issue"))
 app.use("/user", require("./routes/user"))
