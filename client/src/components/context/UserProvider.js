@@ -6,22 +6,24 @@ export const userContext = createContext()
 
 const userAxios = axios.create()
 
-// userAxios.interceptors.request.use(config => {
-//     const token = localStorage.getItem("token")
-// })
+userAxios.interceptors.request.use(config => {
+    const token = localStorage.getItem("token")
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+  })
 
 export default function UserProvider (props) {
 
     // localStorage.setItem("token", token)
     localStorage.setItem("user", "JSON.stringify(user)")
 
-    const storageUser = localStorage.getItem("user")
+    // const storageUser = localStorage.getItem("user")
 
-    if (storageUser) {
-        const parsedUser = (localStorage.getItem("user"))
-        // console.log(parsedUser)
-        // console.log(JSON.parse(localStorage.getItem("user"))) 
-    }
+    // if (storageUser) {
+    //     const parsedUser = (localStorage.getItem("user"))
+    //     // console.log(parsedUser)
+    //     // console.log(JSON.parse(localStorage.getItem("user"))) 
+    // }
 
     const initState = { 
         // user: JSON.parse(localStorage.getItem("user")) || {}, 

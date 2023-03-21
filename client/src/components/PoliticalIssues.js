@@ -48,6 +48,8 @@ export default function Political () {
         )
     }
 
+    
+
     const MappingIssue = (() => {issueState.map((issue) => {
     // const MappingIssue = (() => {nums.map((issue) => {
         // console.log(issue)
