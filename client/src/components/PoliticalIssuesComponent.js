@@ -1,9 +1,14 @@
 import React from "react";
 
 export default function PoliticalIssuesComponent (props) {
+
+    const {issue, user} = props.issue
+    console.log(issue)
+    console.log(user)
     return(
         <div>
-            <h1>Hello World</h1>
+            <p>{issue}</p>
+            <p>Posted by {user}</p>
         </div>
     )
 }
