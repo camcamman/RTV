@@ -9,11 +9,11 @@ userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem("token")
     config.headers.Authorization = `Bearer ${token}`
     return config
-  })
+})
 
 export default function UserProvider (props) {
 
-    localStorage.setItem("user", "JSON.stringify(user)")
+    // localStorage.setItem("user", JSON.stringify(user))
 
     const initState = { 
         token: localStorage.getItem("token") || "",
@@ -60,7 +60,14 @@ export default function UserProvider (props) {
             console.log(userState)
           })
           .catch(err => console.log(err.response.data.errMsg))
-      }
+    }
+
+    function addNewIssue (newIssue) {
+        userAxios.post("/issue", newIssue)
+        // .then(res => console.log(res.data))
+        .then(res => console.log("added"))
+        .catch(err => console.error(err))
+    }
 
     function logout(){
         localStorage.removeItem("token")
@@ -68,9 +75,8 @@ export default function UserProvider (props) {
         setUserState({
           user: {},
           token: "",
-          todos: []
         })
-      }
+    }
 
     return(
         <userContext.Provider
@@ -78,7 +84,8 @@ export default function UserProvider (props) {
             ...userState,
             signup,
             login,
-            logout
+            logout,
+            addNewIssue
         }}>
             {props.children}
         </userContext.Provider>

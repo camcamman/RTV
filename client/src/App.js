@@ -6,7 +6,7 @@ import Political from './components/PoliticalIssues'
 import Navbar from './components/Navbar'
 
 export default function App(){
-  const { token, logout } =  useContext(userContext)
+  const { token, logout, addNewIssue } =  useContext(userContext)
   return (
     <div className="app">
       <Navbar logout={logout}/>
@@ -18,7 +18,9 @@ export default function App(){
 
         <Route
           path='PoliticalIssues'
-          element={<Political/>}
+          element={<Political 
+            addNewIssue = {addNewIssue}
+          />}
         ></Route>
       </Routes>
     </div>
