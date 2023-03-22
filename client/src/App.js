@@ -4,9 +4,11 @@ import Home from './components/Auth/Auth'
 import {userContext} from './components/context/UserProvider'
 import Political from './components/PoliticalIssues'
 import Navbar from './components/Navbar'
+import { MainContext } from './components/context/mainFunctionContext'
 
 export default function App(){
-  const { token, logout, addNewIssue } =  useContext(userContext)
+  const { token, logout } =  useContext(userContext)
+  const { addNewIssue } = useContext(MainContext)
   return (
     <div className="app">
       <Navbar logout={logout}/>

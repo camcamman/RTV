@@ -62,13 +62,6 @@ export default function UserProvider (props) {
           .catch(err => console.log(err.response.data.errMsg))
     }
 
-    function addNewIssue (newIssue) {
-        userAxios.post("/issue", newIssue)
-        // .then(res => console.log(res.data))
-        .then(res => console.log("added"))
-        .catch(err => console.error(err))
-    }
-
     function logout(){
         localStorage.removeItem("token")
         localStorage.removeItem("user")
@@ -80,13 +73,12 @@ export default function UserProvider (props) {
 
     return(
         <userContext.Provider
-        value={{
-            ...userState,
-            signup,
-            login,
-            logout,
-            addNewIssue
-        }}>
+            value={{
+                ...userState,
+                signup,
+                login,
+                logout,
+            }}>
             {props.children}
         </userContext.Provider>
     )
