@@ -24,22 +24,47 @@ authRouter.post("/signup", async (req, res, next) => {
 
 //login 
 authRouter.post("/login", async (req, res, next) => {
+    
+    // if (user === null ) {
+        //     res.status(403)
+        //     return next(new Error("Username or Password are incorrect"))
+        // }
+        
+        // if(foundPassword === null){
+            //     res.status(403)
+            //     return next(new Error("Username or Password are incorrect"))
+            // }
+            
+            // user.checkPassword(req.body.password, (err, isMatch) => {
+                //     if(err){
+                    //       res.status(403)
+                    //       return next(new Error("Username or Password are incorrect"))
+                    //     }
+                    //     if(!isMatch){
+                        //       res.status(403)
+                        //       return next(new Error("Username or Password are incorrect"))
+                        //     }
+                        //     const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
+                        //     return res.status(200).send({ token, user: user.withoutPassword() })
     const foundLogin = await User.findOne({ username: req.body.username.toLowerCase() }).exec()
     const foundPassword = await User.findOne({ password: req.body.password }).exec()
 
-    if (foundLogin === null ) {
-        res.status(403)
-        return next(new Error("Username or Password are incorrect"))
+    console.log(foundLogin)
+    if (foundLogin ===  null) {
+        return next (new Error ("Username or Password are incorrect"))
     }
-
-    if(foundPassword === null){
-        res.status(403)
-        return next(new Error("Username or Password are incorrect"))
-    }
-
-    const token = jwt.sign(foundLogin.toObject(), process.env.SECRET)
-    
-    return res.status(200).send({ token, foundLogin })
+    foundLogin.checkPassword(foundPassword, (err, isMatch) => {
+        if (err) {
+            res.status(403)
+            return next(new Error("Username or Password are incorrect"))
+        }
+        if (isMatch) {
+            res.status(403)
+            return next(new Error("Username or Password are incorrect"))
+        }
+        const token = jwt.sign(foundLogin.toObject(), process.env.SECRET)
+        return res.status(200).send({token, foundLogin})
+    })
 })
 
 module.exports = authRouter
