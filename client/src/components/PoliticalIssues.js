@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+// import user from "../../../models/user";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
 const initInputs = {newIssue: ""}
@@ -8,22 +10,35 @@ export default function Political (props) {
     const [issueState, setIssueState] = useState([])
     const [issueForm, setIssueForm] = useState(initInputs)
     const { addNewIssue } = props
+    const logedInUser = {
+        logedInUsername: JSON.parse(localStorage.getItem("user")).username,
+        logedInId: JSON.parse(localStorage.getItem("user"))._id
+    }
+
+    // const user_Id = useParams().userId
+    // const userUsername = useParams().username
+    // const params = useParams()
 
     let newIssueObj = {
         issue: "",
-        user: ""
+        // user: ""
     }
+
+    let newIssueObjForState = {}
 
     function getIssue () {
         axios.get("/issue")
         .then(res => {
+            // console.log(res.data)
             res.data.map((theData) => {
+                // console.log(theData)
                 setIssueState(prevState => {
                     return[
                         ...prevState,
                         theData
                     ]
                 })
+                // console.log(issueState)
             })
         })
         .catch(err => console.error(err))
@@ -40,21 +55,38 @@ export default function Political (props) {
         // console.log(issueForm)
     }
 
+    //handle sumbit to add new issue to page 
     function handleSumbit (e) {
         e.preventDefault()
         newIssueObj = {
             issue: issueForm.newIssue,
-            user: JSON.parse(localStorage.getItem("user")).username
+            user: logedInUser.logedInId
         }
 
-        addNewIssue(newIssueObj)
+        newIssueObjForState = {
+            issue: issueForm.newIssue,
+            user: {
+                username: logedInUser.logedInUsername,
+                _id: logedInUser.logedInId
+            }
+        }
+
+        // console.log(issueState)
+        // console.log(issueState.user)
+        // console.log(issueState.user.username)
+
+        addNewIssue(newIssueObj, logedInUser.logedInId)
+        // console.log(newIssueObj)
+        // console.log(newIssueObj.issue)
+        // console.log(logedInUser.logedInId)
 
         setIssueState(prevState => {
             return[
                 ...prevState,
-                newIssueObj
+                newIssueObjForState
             ]
         })
+
         // console.log(issueState)
     }
 
@@ -79,8 +111,7 @@ export default function Political (props) {
                 </form>
             </div>
             <div>
-                {/* {console.log(issueState[0])} */}
-            {/* {issueState[0].map((issue) => { */}
+                {/* {console.log(issueState)} */}
             {issueState.map((issue) => {
                 // console.log(issue)
             return(

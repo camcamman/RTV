@@ -13,9 +13,8 @@ userAxios.interceptors.request.use(config => {
 
 export default function MainProvider (props) {
 
-    function addNewIssue (newIssue) {
-        userAxios.post("/issue", newIssue)
-        // .then(res => console.log(res.data))
+    function addNewIssue (newIssue, user_Id) {
+        userAxios.post(`/issue/${user_Id}`, newIssue)
         .then(res => console.log("added"))
         .catch(err => console.error(err))
     }
