@@ -76,7 +76,6 @@ export default function Political (props) {
         // console.log(issueState.user.username)
 
         addNewIssue(newIssueObj, logedInUser.logedInId)
-        // console.log(newIssueObj)
         // console.log(newIssueObj.issue)
         // console.log(logedInUser.logedInId)
 

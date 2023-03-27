@@ -1,8 +1,8 @@
 const express = require("express")
 const issueRouter = express.Router()
 const mongoose = require("mongoose")
-const issue = require("../models/IssueRouter")
-const issueDb = require("../models/IssueRouter")
+const issue = require("../models/Issue")
+const issueDb = require("../models/Issue")
 
 //get all 
 issueRouter.get("/", async (req, res, next)=> {
@@ -41,6 +41,24 @@ issueRouter.put("/:issueId", async (req, res) => {
     const newIssue = req.body
     const updatedComment = await issueDb.findByIdAndUpdate(id, newIssue)
     return res.status(200).send(updatedComment)
+})
+
+//up vote issue 
+issueRouter.put("/like/:issueId", (req, res, next) => {
+    const updatedIssue = issue.updateOne(
+        {_id: req.params.issueId},
+        //action 
+        {$inc: {votes: 1 }},
+        // {new: true},
+    )
+        // (err, updatedIssue) => {
+        //     if (err) {
+        //         res.status(500).send(err)
+        //         return next (err)
+        //     }
+            return res.status(201).send(updatedIssue)
+        // }
+    // )
 })
 
 

@@ -19,10 +19,17 @@ export default function MainProvider (props) {
         .catch(err => console.error(err))
     }
 
+    function upVoteIssue (issueId) {
+        userAxios.put(`/like/${issueId}`)
+        .then(() => console.log("added"))
+        .catch(err => console.error(err))
+    }
+
     return(
         <MainContext.Provider
             value={{
-                addNewIssue
+                addNewIssue,
+                upVoteIssue
                 }}>
             {props.children}
         </MainContext.Provider>

@@ -1,7 +1,7 @@
 const express = require(`express`)
 const commentsRouter = express.Router()
 const mongoose = require("mongoose")
-const CommentDb = require("../models/CommentsRouter")
+const CommentDb = require("../models/Comments")
 
 //get all 
 commentsRouter.get("/", async (req, res, next)=> {

@@ -19,9 +19,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/RTVdb')
 //routes 
 app.use("/auth", require("./routes/authRouter"))
 app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256'] })) 
-app.use("/comments", require("./routes/comments"))
-app.use("/issue", require("./routes/issue"))
-app.use("/user", require("./routes/user"))
+app.use("/comments", require("./routes/commentsRouter"))
+app.use("/issue", require("./routes/issueRouter"))
+app.use("/user", require("./routes/userRouter"))
 
 //main err handling 
 app.use((err, req, res, next) => {
