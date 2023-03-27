@@ -20,7 +20,7 @@ export default function MainProvider (props) {
     }
 
     function upVoteIssue (issueId) {
-        userAxios.put(`/like/${issueId}`)
+        userAxios.put(`/issue/like/${issueId}`)
         .then(() => console.log("added"))
         .catch(err => console.error(err))
     }

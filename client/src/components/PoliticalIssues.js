@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 // import user from "../../../models/user";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
@@ -9,7 +9,7 @@ const initInputs = {newIssue: ""}
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
     const [issueForm, setIssueForm] = useState(initInputs)
-    const { addNewIssue } = props
+    const { addNewIssue, upVoteIssue } = props
     const logedInUser = {
         logedInUsername: JSON.parse(localStorage.getItem("user")).username,
         logedInId: JSON.parse(localStorage.getItem("user"))._id
@@ -93,6 +93,10 @@ export default function Political (props) {
         getIssue()
     }, [])
 
+    // function testUpVote() {
+    //     upVoteIssue("641ca77e5f77e0a707540010")
+    // }
+
     // console.log(addNewIssue)
 
     return (
@@ -109,15 +113,21 @@ export default function Political (props) {
                     <input type="submit"/>
                 </form>
             </div>
+
+            {/* <button onClick={testUpVote}>upVote</button> */}
+
             <div>
                 {/* {console.log(issueState)} */}
             {issueState.map((issue) => {
-                // console.log(issue)
+                    // console.log(issue)
+                    // console.log(issue._id)
+                    // console.log(issue.votes)
             return(
                 <div>
                     <PoliticalIssuesComponent 
                     key = {issue._id}
                     issue = {issue}
+                    upVoteIssue = {upVoteIssue}
                     />
                 </div>
             )

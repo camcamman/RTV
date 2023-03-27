@@ -44,22 +44,13 @@ issueRouter.put("/:issueId", async (req, res) => {
 })
 
 //up vote issue 
-issueRouter.put("/like/:issueId", (req, res, next) => {
-    const updatedIssue = issue.updateOne(
+issueRouter.put("/like/:issueId", async (req, res, next) => {
+    const updatedIssue = await issue.updateOne(
         {_id: req.params.issueId},
         //action 
         {$inc: {votes: 1 }},
-        // {new: true},
     )
-        // (err, updatedIssue) => {
-        //     if (err) {
-        //         res.status(500).send(err)
-        //         return next (err)
-        //     }
-            return res.status(201).send(updatedIssue)
-        // }
-    // )
+    return res.status(201).send(updatedIssue)
 })
-
 
 module.exports = issueRouter
