@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CommentComponet from "./CommentForm";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
 const initInputs = {newIssue: ""}
@@ -13,10 +12,6 @@ export default function Political (props) {
         logedInUsername: JSON.parse(localStorage.getItem("user")).username,
         logedInId: JSON.parse(localStorage.getItem("user"))._id
     }
-
-    // const user_Id = useParams().userId
-    // const userUsername = useParams().username
-    // const params = useParams()
 
     let newIssueObj = {
         issue: "",
@@ -70,11 +65,11 @@ export default function Political (props) {
             }
         }
 
+        addNewIssue(newIssueObj, logedInUser.logedInId)
+
         // console.log(issueState)
         // console.log(issueState.user)
         // console.log(issueState.user.username)
-
-        addNewIssue(newIssueObj, logedInUser.logedInId)
         // console.log(newIssueObj.issue)
         // console.log(logedInUser.logedInId)
 
@@ -84,7 +79,6 @@ export default function Political (props) {
                 newIssueObjForState
             ]
         })
-
         // console.log(issueState)
     }
 
@@ -107,7 +101,7 @@ export default function Political (props) {
                 </form>
             </div>
 
-                <button onClick={(() => addComment())}>Add comment</button>
+                {/* <button onClick={(() => addComment())}>Add comment</button> */}
 
             <div>
                 {/* {console.log(issueState)} */}
@@ -118,15 +112,14 @@ export default function Political (props) {
                 // console.log(issue.votes)
                 return(
                     <div>
+
                     {/* <button onClick={(() => addComment(testComment, logedInUser.logedInId, issue._id))}>Add comment</button> */}
 
                     <PoliticalIssuesComponent 
                     key = {issue._id}
                     issue = {issue}
+                    addComment={addComment}
                     upVoteIssue = {upVoteIssue}
-                    />
-                    <CommentComponet 
-                        addComment={addComment}
                     />
                 </div>
             )
