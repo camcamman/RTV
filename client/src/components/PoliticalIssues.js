@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
-const initInputs = {newIssue: ""}
+const initInputs = {newIssue: "", newDescription: ""}
 
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
@@ -54,11 +54,13 @@ export default function Political (props) {
         e.preventDefault()
         newIssueObj = {
             issue: issueForm.newIssue,
-            user: logedInUser.logedInId
+            description: issueForm.newDescription
+            // user: logedInUser.logedInId
         }
 
         newIssueObjForState = {
             issue: issueForm.newIssue,
+            description: issueForm.newDescription,
             user: {
                 username: logedInUser.logedInUsername,
                 _id: logedInUser.logedInId
@@ -95,6 +97,13 @@ export default function Political (props) {
                         placeholder="New issue"
                         name="newIssue"
                         value={issueForm.newIssue}
+                        onChange={handleChange}
+                    />
+                    <input
+                        type="text"
+                        placeholder="New description"
+                        name="newDescription"
+                        value={issueForm.newDescription}
                         onChange={handleChange}
                     />
                     <input type="submit"/>

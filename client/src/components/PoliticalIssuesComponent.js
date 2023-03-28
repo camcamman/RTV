@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
 
 export default function PoliticalIssuesComponent (props) {
-    const {issue, user, _id, votes} = props.issue
+    const {issue, user, _id, votes, description} = props.issue
     const { upVoteIssue, addComment, userId } = props
     const [voteNumber, setVoteNumber] = useState(votes)
     const [comments, setComments] = useState([])
@@ -53,6 +53,7 @@ export default function PoliticalIssuesComponent (props) {
     return(
         <div>
             <p>{issue}</p>
+            <p>{description}</p>
             <p>Posted by {user.username}</p>
             <p>This issue has {voteNumber} votes</p>
             <button onClick={voteButton}>Up vote issue</button>
