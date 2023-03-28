@@ -3,13 +3,22 @@ import React, { useState } from "react";
 export default function CommentComponet (props) {
     // const initInputs = {comment: ""}
     const [input, setInput] = useState("")
-    const { addCommentBackEnd, addNewCommentFrontEnd } = props
+    const { 
+        addCommentBackEnd, 
+        addNewCommentFrontEnd,
+        userId,
+        issueId
+    } = props
 
     // console.log(input)
 
     //handle submit to add comment to issue 
     function handleSubmit (e) {
         e.preventDefault()
+        const backEndObject = {
+            comment: input
+        }
+        addCommentBackEnd(backEndObject, userId, issueId)
         // console.log(input)
         addNewCommentFrontEnd(input)
         setInput("")

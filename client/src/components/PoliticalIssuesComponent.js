@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
 
 export default function PoliticalIssuesComponent (props) {
     const {issue, user, _id, votes} = props.issue
-    const { upVoteIssue, addComment } = props
+    const { upVoteIssue, addComment, userId } = props
     const [voteNumber, setVoteNumber] = useState(votes)
     const [comments, setComments] = useState([])
 
@@ -21,6 +22,30 @@ export default function PoliticalIssuesComponent (props) {
         })
     }
 
+    function getComments () {
+        axios.get("/comments")
+        .then(res => {
+            // console.log(res.data)
+            res.data.map(theComment => {
+                // console.log("working?")
+                if (theComment.issue === _id) {
+                    // console.log("we have a match")
+                    setComments(prevComments => {
+                        return[
+                            ...prevComments,
+                            theComment.comment
+                        ]
+                    })
+                }
+            })
+        })
+        .catch(err => console.error(err))
+    }
+
+    useEffect(() => {
+        getComments()
+    },[])
+
     // console.log(upVoteIssue)
     // console.log(_id)
     // console.log(issue)
@@ -35,13 +60,16 @@ export default function PoliticalIssuesComponent (props) {
             <CommentForm 
                 addCommentBackEnd = {addComment}
                 addNewCommentFrontEnd = {addNewComment}
+                userId = {userId}
+                issueId = {_id}
+                key = {_id}
             />
 
             {comments.map((theComment) => {
-                console.log(theComment)
+                // console.log(theComment)
                 return(
                     <div>
-                        {theComment}
+                        {theComment} 
                     </div>
                 )
             })}

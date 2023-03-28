@@ -120,6 +120,7 @@ export default function Political (props) {
                     issue = {issue}
                     addComment={addComment}
                     upVoteIssue = {upVoteIssue}
+                    userId = {logedInUser.logedInId}
                     />
                 </div>
             )
