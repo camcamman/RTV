@@ -20,7 +20,13 @@ export default function MainProvider (props) {
     }
 
     function upVoteIssue (issueId) {
-        userAxios.put(`/issue/like/${issueId}`)
+        userAxios.put(`/issue/upVote/${issueId}`)
+        .then(() => console.log("added"))
+        .catch(err => console.error(err))
+    }
+
+    function downVoteIssue (issueId) {
+        userAxios.put(`issue/downVote/${issueId}`)
         .then(() => console.log("added"))
         .catch(err => console.error(err))
     }
@@ -36,6 +42,7 @@ export default function MainProvider (props) {
             value={{
                 addNewIssue,
                 upVoteIssue,
+                downVoteIssue,
                 addComment
                 }}>
             {props.children}

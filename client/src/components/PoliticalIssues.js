@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+// import { MainContext } from "./context/mainFunctionContext";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
 const initInputs = {newIssue: "", newDescription: ""}
@@ -7,7 +8,8 @@ const initInputs = {newIssue: "", newDescription: ""}
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
     const [issueForm, setIssueForm] = useState(initInputs)
-    const { addNewIssue, upVoteIssue, addComment } = props
+    const { addNewIssue } = props
+    // const { addNewIssue } = useContext(MainContext)
     const logedInUser = {
         logedInUsername: JSON.parse(localStorage.getItem("user")).username,
         logedInId: JSON.parse(localStorage.getItem("user"))._id
@@ -58,6 +60,7 @@ export default function Political (props) {
             // user: logedInUser.logedInId
         }
 
+        //the object for state 
         newIssueObjForState = {
             issue: issueForm.newIssue,
             description: issueForm.newDescription,
@@ -67,14 +70,10 @@ export default function Political (props) {
             }
         }
 
+        //adding new issue for the back end 
         addNewIssue(newIssueObj, logedInUser.logedInId)
 
-        // console.log(issueState)
-        // console.log(issueState.user)
-        // console.log(issueState.user.username)
-        // console.log(newIssueObj.issue)
-        // console.log(logedInUser.logedInId)
-
+        //adding the new issue to the front end for state
         setIssueState(prevState => {
             return[
                 ...prevState,
@@ -84,6 +83,7 @@ export default function Political (props) {
         // console.log(issueState)
     }
 
+    //use effect to get all issues 
     useEffect(() => {
         getIssue()
     }, [])
@@ -109,26 +109,16 @@ export default function Political (props) {
                     <input type="submit"/>
                 </form>
             </div>
-
-                {/* <button onClick={(() => addComment())}>Add comment</button> */}
-
             <div>
-                {/* {console.log(issueState)} */}
             {issueState.map((issue) => {
-
-                // console.log(issue)
-                // console.log(issue._id)
-                // console.log(issue.votes)
                 return(
                     <div>
-
-                    {/* <button onClick={(() => addComment(testComment, logedInUser.logedInId, issue._id))}>Add comment</button> */}
-
                     <PoliticalIssuesComponent 
                     key = {issue._id}
                     issue = {issue}
-                    addComment={addComment}
-                    upVoteIssue = {upVoteIssue}
+                    // addComment={addComment}
+                    // upVoteIssue = {upVoteIssue}
+                    // downVoteIssue = {downVoteIssue}
                     userId = {logedInUser.logedInId}
                     />
                 </div>

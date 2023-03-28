@@ -44,11 +44,21 @@ issueRouter.put("/:issueId", async (req, res) => {
 })
 
 //up vote issue 
-issueRouter.put("/like/:issueId", async (req, res, next) => {
+issueRouter.put("/upVote/:issueId", async (req, res, next) => {
     const updatedIssue = await issue.updateOne(
         {_id: req.params.issueId},
         //action 
         {$inc: {votes: 1 }},
+    )
+    return res.status(201).send(updatedIssue)
+})
+
+//down vote issue
+issueRouter.put("/downVote/:issueId", async (req, res, next) => {
+    const updatedIssue = await issue.updateOne(
+        {_id: req.params.issueId},
+        //action 
+        {$inc: {votes: -1 }},
     )
     return res.status(201).send(updatedIssue)
 })

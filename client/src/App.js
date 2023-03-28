@@ -8,7 +8,7 @@ import { MainContext } from './components/context/mainFunctionContext'
 
 export default function App(){
   const { token, logout } =  useContext(userContext)
-  const { addNewIssue, upVoteIssue, addComment } = useContext(MainContext)
+  const { addNewIssue, upVoteIssue, addComment, downVoteIssue } = useContext(MainContext)
 
   // console.log(user._id)
 
@@ -26,6 +26,7 @@ export default function App(){
           element={<Political 
             addNewIssue = {addNewIssue}
             upVoteIssue = {upVoteIssue}
+            downVoteIssue = {downVoteIssue}
             addComment = {addComment}
           />}
         ></Route>
