@@ -9,7 +9,7 @@ const initInputs = {newIssue: ""}
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
     const [issueForm, setIssueForm] = useState(initInputs)
-    const { addNewIssue, upVoteIssue } = props
+    const { addNewIssue, upVoteIssue, addComment } = props
     const logedInUser = {
         logedInUsername: JSON.parse(localStorage.getItem("user")).username,
         logedInId: JSON.parse(localStorage.getItem("user"))._id
@@ -99,6 +99,10 @@ export default function Political (props) {
 
     // console.log(addNewIssue)
 
+    // const testComment = {
+    //     comment: "facts fr fr"
+    // }
+
     return (
         <div>
             <div>
@@ -114,16 +118,19 @@ export default function Political (props) {
                 </form>
             </div>
 
-            {/* <button onClick={testUpVote}>upVote</button> */}
+                <button onClick={(() => addComment())}>Add comment</button>
 
             <div>
                 {/* {console.log(issueState)} */}
             {issueState.map((issue) => {
-                    // console.log(issue)
-                    // console.log(issue._id)
-                    // console.log(issue.votes)
-            return(
-                <div>
+
+                // console.log(issue)
+                // console.log(issue._id)
+                // console.log(issue.votes)
+                return(
+                    <div>
+                    {/* <button onClick={(() => addComment(testComment, logedInUser.logedInId, issue._id))}>Add comment</button> */}
+
                     <PoliticalIssuesComponent 
                     key = {issue._id}
                     issue = {issue}

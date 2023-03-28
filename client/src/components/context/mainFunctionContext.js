@@ -25,11 +25,18 @@ export default function MainProvider (props) {
         .catch(err => console.error(err))
     }
 
+    function addComment (newComment, userId, issueId) {
+        userAxios.post(`/comments/${userId}/${issueId}`, newComment)
+        .then(res => console.log(res))
+        .catch(err => console.error(err))
+    }
+
     return(
         <MainContext.Provider
             value={{
                 addNewIssue,
-                upVoteIssue
+                upVoteIssue,
+                addComment
                 }}>
             {props.children}
         </MainContext.Provider>

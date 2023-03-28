@@ -56,7 +56,7 @@ export default function Home () {
 
             </>
         }
-        <h1>3</h1>
+        <h1>6</h1>
         <h1>1</h1>
         </div>
     )
