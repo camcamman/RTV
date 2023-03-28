@@ -10,10 +10,10 @@ const commentsSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'User', 
     },
-    // votes: {
-    //     type: Number,
-    //     default: 0
-    // }
+    issue: {
+        type: Schema.Types.ObjectId,
+        ref: "issue"
+    }
 })
 
 module.exports = mongoos.model("comments", commentsSchema)

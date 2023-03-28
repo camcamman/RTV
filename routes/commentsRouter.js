@@ -17,8 +17,9 @@ commentsRouter.get("/:commentsId", async (req, res, next) => {
 })
 
 //add one 
-commentsRouter.post("/:userId", async (req, res, next) => {
+commentsRouter.post("/:userId/:issueId", async (req, res, next) => {
     req.body.user = req.params.userId
+    req.body.issue = req.params.issueId
     const newComment = new CommentDb(req.body)
     const result = await newComment.save()
     return res.status(200).send(result)
