@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import user from "../../../models/user";
+import CommentComponet from "./CommentForm";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
 const initInputs = {newIssue: ""}
@@ -93,16 +92,6 @@ export default function Political (props) {
         getIssue()
     }, [])
 
-    // function testUpVote() {
-    //     upVoteIssue("641ca77e5f77e0a707540010")
-    // }
-
-    // console.log(addNewIssue)
-
-    // const testComment = {
-    //     comment: "facts fr fr"
-    // }
-
     return (
         <div>
             <div>
@@ -135,6 +124,9 @@ export default function Political (props) {
                     key = {issue._id}
                     issue = {issue}
                     upVoteIssue = {upVoteIssue}
+                    />
+                    <CommentComponet 
+                        addComment={addComment}
                     />
                 </div>
             )
