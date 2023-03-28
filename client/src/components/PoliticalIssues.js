@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-// import { MainContext } from "./context/mainFunctionContext";
+import { MainContext } from "./context/mainFunctionContext";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
 const initInputs = {newIssue: "", newDescription: ""}
@@ -8,7 +8,8 @@ const initInputs = {newIssue: "", newDescription: ""}
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
     const [issueForm, setIssueForm] = useState(initInputs)
-    const { addNewIssue } = props
+    // const { addNewIssue } = props
+    const { addNewIssue } = useContext(MainContext)
     // const { addNewIssue } = useContext(MainContext)
     const logedInUser = {
         logedInUsername: JSON.parse(localStorage.getItem("user")).username,

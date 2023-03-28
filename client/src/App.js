@@ -4,11 +4,13 @@ import Home from './components/Auth/Auth'
 import {userContext} from './components/context/UserProvider'
 import Political from './components/PoliticalIssues'
 import Navbar from './components/Navbar'
-import { MainContext } from './components/context/mainFunctionContext'
+import UserIssues from './components/UserIssues'
+// import { MainContext } from './components/context/mainFunctionContext'
+import ProtectedRoute from './components/protectedRoute'
 
 export default function App(){
   const { token, logout } =  useContext(userContext)
-  const { addNewIssue, upVoteIssue, addComment, downVoteIssue } = useContext(MainContext)
+  // const { addNewIssue, upVoteIssue, addComment, downVoteIssue } = useContext(MainContext)
 
   // console.log(user._id)
 
@@ -21,14 +23,35 @@ export default function App(){
           element={ token ? <Navigate to={`/PoliticalIssues`}/> : <Home />}
         />
 
+        {/* <Route
+         path='/userIssues'
+         element={<UserIssues/>}
+        ></Route> */}
+
         <Route
           path='/PoliticalIssues'
-          element={<Political 
-            addNewIssue = {addNewIssue}
-            upVoteIssue = {upVoteIssue}
-            downVoteIssue = {downVoteIssue}
-            addComment = {addComment}
-          />}
+          element={
+            <ProtectedRoute
+              token={token}
+              redirectTo="/">
+
+              <Political/>
+
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path='/userIssues'
+          element={
+            <ProtectedRoute
+              token={token}
+              redirectTo="/">
+
+              <UserIssues/>
+
+            </ProtectedRoute>
+          }
         ></Route>
       </Routes>
     </div>
