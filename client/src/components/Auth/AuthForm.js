@@ -6,7 +6,8 @@ export default function AuthForm (props) {
         handleChange,
         buttonText,
         handleSubmit,
-        inputs: {username, password}
+        inputs: {username, password},
+        errMsg
     } = props
 
     return(
@@ -33,6 +34,7 @@ export default function AuthForm (props) {
                 </input>
                 <button> {buttonText} </button>
             </form>
+            <p>{errMsg}</p>
         </>
     )
 }

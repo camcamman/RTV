@@ -18,6 +18,7 @@ export default function UserProvider (props) {
     const initState = { 
         token: localStorage.getItem("token") || "",
         user: localStorage.getItem("user") || {}, 
+        errMsg: ""
     }
 
     const [userState, setUserState] = useState(initState)
@@ -42,7 +43,7 @@ export default function UserProvider (props) {
             }))
             console.log(userState)
         })
-        .catch(err => handleAuthErr(err.response.data.errMsg))
+      .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     
@@ -59,7 +60,7 @@ export default function UserProvider (props) {
             }))
             console.log(userState)
           })
-          .catch(err => console.log(err.response.data.errMsg))
+      .catch(err => handleAuthErr(err.response.data.errMsg))
     }
 
     function logout(){
@@ -70,6 +71,20 @@ export default function UserProvider (props) {
           token: "",
         })
     }
+
+    function handleAuthErr(errMsg){
+        setUserState(prevState => ({
+          ...prevState,
+          errMsg
+        }))
+      }
+    
+      function resetAuthErr(){
+        setUserState(prevState => ({
+          ...prevState,
+          errMsg: ""
+        }))
+      }
 
     return(
         <userContext.Provider

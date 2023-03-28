@@ -10,7 +10,8 @@ export default function Home () {
 
     const {
         signup,
-        login
+        login,
+        errMsg
     } = useContext(userContext)
 
     function handleChange(e){
@@ -41,6 +42,7 @@ export default function Home () {
                 handleSubmit={handleSignin}
                 inputs={inputs}
                 buttonText="Sign Up"
+                errMsg = {errMsg}
             />
             <button onClick={() => setToggle(prev => !prev)}>Already a member?</button>
             </> 
@@ -51,6 +53,7 @@ export default function Home () {
                 handleSubmit={handleLogin}
                 inputs={inputs}
                 buttonText="Log In"
+                errMsg = {errMsg}
             />
           <button onClick={() => setToggle(prev => !prev)}>Not a member?</button>
 
