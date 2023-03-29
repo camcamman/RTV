@@ -124,7 +124,6 @@ export default function Political (props) {
                         <PoliticalIssuesComponent 
                             // key = {issue._id}
                             issue = {issue}
-                            userId = {logedInUser.logedInId}
                         />
                     </div>
                 )

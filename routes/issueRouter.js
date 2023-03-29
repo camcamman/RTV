@@ -63,4 +63,28 @@ issueRouter.put("/downVote/:issueId", async (req, res, next) => {
     return res.status(201).send(updatedIssue)
 })
 
+//add user to votedUseres array
+// issueRouter.put("addVotedUser/:issueId", async (req, res) => {
+//     const id = req.params.issueId
+//     const newIssue = req.body
+//     const updatedComment = await issueDb.findByIdAndUpdate(id, newIssue)
+//     return res.status(200).send(updatedComment)
+// })
+
+// issueRouter.put("/votedUser/:issueId", async (req, res, next) => {
+//     const id = req.params.issueId
+//     console.log(id)
+//     const updatedIssue = await issue.updateOne(
+//         {_id: req.params.issueId},
+//         // {_id: id},
+
+//         {$addToSet: {votedUsers: 1}}
+
+//         // { $push: { votedUsers: req.params.issueId } }
+//         // {$push: {votedUsers: 1 }}
+//         // { $push: {votedUsers: id} }
+//     )
+//     return res.status(201).send(updatedIssue)
+// })
+
 module.exports = issueRouter

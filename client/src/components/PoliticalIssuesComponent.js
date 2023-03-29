@@ -4,24 +4,55 @@ import CommentForm from "./CommentForm";
 import { MainContext } from "./context/mainFunctionContext";
 
 export default function PoliticalIssuesComponent (props) {
-    const {issue, user, _id, votes, description, voteNum} = props.issue
+    const {issue, user, _id, description, voteNum} = props.issue
     // const { upVoteIssue, downVoteIssue, addComment, userId } = props
-    const { userId } = props
-    const { upVoteIssue, addComment, downVoteIssue } = useContext(MainContext)
+    const userId = user._id
+    const { upVoteIssue, addComment, downVoteIssue, saveVotedUser } = useContext(MainContext)
 
     const [voteNumber, setVoteNumber] = useState(voteNum)
     const [comments, setComments] = useState([])
+    const [votedUserState, setVotedUserState] = useState([])
 
+    // console.log(props.issue)
+
+
+    //up vote issue 
     function upVoteButton () {
+        setVotedUserState(prevArr => {
+            return [
+                ...prevArr,
+                userId
+            ]
+        })
+
+        let newVotedUserObj = {votedUsers: votedUserState}
+
+        // console.log(votedUserState)
+        // console.log(newVotedUserObj)
+
         upVoteIssue(_id)
+        saveVotedUser(_id, newVotedUserObj)
         setVoteNumber(prevVoteNum => prevVoteNum + 1)
     }
 
+    //down vote issue
     function downVoteButton () {
+
+        setVotedUserState(prevArr => {
+            return [
+                ...prevArr,
+                userId
+            ]
+        })
+
+        let newVotedUserObj = {votedUsers: votedUserState}
+
         downVoteIssue(_id)
+        saveVotedUser(_id, newVotedUserObj)
         setVoteNumber(prevVoteNum => prevVoteNum - 1)
     }
 
+    //add comment to front end 
     function addNewComment (newComment) {
         setComments(prevComments => {
             return[
@@ -31,6 +62,7 @@ export default function PoliticalIssuesComponent (props) {
         })
     }
 
+    //get all comments and save them to state 
     function getComments () {
         axios.get("/comments")
         .then(res => {
@@ -51,6 +83,7 @@ export default function PoliticalIssuesComponent (props) {
         .catch(err => console.error(err))
     }
 
+    //call function to get all comments and save them to state 
     useEffect(() => {
         getComments()
     },[])
@@ -59,6 +92,7 @@ export default function PoliticalIssuesComponent (props) {
     // console.log(_id)
     // console.log(issue)
     // console.log(user) 
+    
     return(
         <div>
             <p>{issue}</p>

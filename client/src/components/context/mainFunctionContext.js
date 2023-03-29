@@ -31,6 +31,12 @@ export default function MainProvider (props) {
         .catch(err => console.error(err))
     }
 
+    function saveVotedUser (issueId, newVotedArry) {
+        userAxios.put(`/issue/${issueId}`, newVotedArry)
+        .then(() => console.log("added"))
+        .catch(err => console.error(err))
+    }
+
     function addComment (newComment, userId, issueId) {
         userAxios.post(`/comments/${userId}/${issueId}`, newComment)
         .then(res => console.log(res))
@@ -43,7 +49,8 @@ export default function MainProvider (props) {
                 addNewIssue,
                 upVoteIssue,
                 downVoteIssue,
-                addComment
+                addComment,
+                saveVotedUser
                 }}>
             {props.children}
         </MainContext.Provider>
