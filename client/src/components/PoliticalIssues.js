@@ -8,9 +8,7 @@ const initInputs = {newIssue: "", newDescription: ""}
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
     const [issueForm, setIssueForm] = useState(initInputs)
-    // const { addNewIssue } = props
     const { addNewIssue } = useContext(MainContext)
-    // const { addNewIssue } = useContext(MainContext)
     const logedInUser = {
         logedInUsername: JSON.parse(localStorage.getItem("user")).username,
         logedInId: JSON.parse(localStorage.getItem("user"))._id
@@ -88,6 +86,12 @@ export default function Political (props) {
     useEffect(() => {
         getIssue()
     }, [])
+    
+    function filterVotes () {
+        issueState.sort((a, b) => b.votes-a.votes)
+    }
+
+    filterVotes()
 
     return (
         <div>
@@ -117,9 +121,6 @@ export default function Political (props) {
                     <PoliticalIssuesComponent 
                     key = {issue._id}
                     issue = {issue}
-                    // addComment={addComment}
-                    // upVoteIssue = {upVoteIssue}
-                    // downVoteIssue = {downVoteIssue}
                     userId = {logedInUser.logedInId}
                     />
                 </div>

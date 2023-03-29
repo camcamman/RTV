@@ -14,8 +14,7 @@ export default function App(){
 
   return (
     <div className="app">
-      <Navbar 
-        logout={logout}/>
+      {token && <Navbar logout={logout}/>}
 
       <Routes>
         <Route 
