@@ -5,18 +5,18 @@ import {userContext} from './components/context/UserProvider'
 import Political from './components/PoliticalIssues'
 import Navbar from './components/Navbar'
 import UserIssues from './components/UserIssues'
-// import { MainContext } from './components/context/mainFunctionContext'
 import ProtectedRoute from './components/protectedRoute'
 
 export default function App(){
   const { token, logout } =  useContext(userContext)
-  // const { addNewIssue, upVoteIssue, addComment, downVoteIssue } = useContext(MainContext)
 
   // console.log(user._id)
 
   return (
     <div className="app">
-      <Navbar logout={logout}/>
+      <Navbar 
+        logout={logout}/>
+
       <Routes>
         <Route 
           path="/" 
