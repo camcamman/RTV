@@ -4,12 +4,12 @@ import CommentForm from "./CommentForm";
 import { MainContext } from "./context/mainFunctionContext";
 
 export default function PoliticalIssuesComponent (props) {
-    const {issue, user, _id, votes, description} = props.issue
+    const {issue, user, _id, votes, description, voteNum} = props.issue
     // const { upVoteIssue, downVoteIssue, addComment, userId } = props
     const { userId } = props
     const { upVoteIssue, addComment, downVoteIssue } = useContext(MainContext)
 
-    const [voteNumber, setVoteNumber] = useState(votes)
+    const [voteNumber, setVoteNumber] = useState(voteNum)
     const [comments, setComments] = useState([])
 
     function upVoteButton () {

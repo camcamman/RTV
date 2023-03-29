@@ -14,7 +14,11 @@ const issueSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'User', 
     },
-    votes: {
+    votedUsers:{
+        type: Array,
+        required: true
+    },
+    voteNum: {
         type: Number,
         default: 0
     }

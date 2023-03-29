@@ -48,7 +48,7 @@ issueRouter.put("/upVote/:issueId", async (req, res, next) => {
     const updatedIssue = await issue.updateOne(
         {_id: req.params.issueId},
         //action 
-        {$inc: {votes: 1 }},
+        {$inc: {voteNum: 1 }},
     )
     return res.status(201).send(updatedIssue)
 })
@@ -58,7 +58,7 @@ issueRouter.put("/downVote/:issueId", async (req, res, next) => {
     const updatedIssue = await issue.updateOne(
         {_id: req.params.issueId},
         //action 
-        {$inc: {votes: -1 }},
+        {$inc: {voteNum: -1 }},
     )
     return res.status(201).send(updatedIssue)
 })

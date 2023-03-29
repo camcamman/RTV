@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "./context/mainFunctionContext";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
 
-const initInputs = {newIssue: "", newDescription: ""}
+const initInputs = {newIssue: "", newDescription: "", votes:{users: []}}
 
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
@@ -55,7 +55,9 @@ export default function Political (props) {
         e.preventDefault()
         newIssueObj = {
             issue: issueForm.newIssue,
-            description: issueForm.newDescription
+            description: issueForm.newDescription,
+            votes: {users: []}
+            
             // user: logedInUser.logedInId
         }
 
@@ -66,7 +68,8 @@ export default function Political (props) {
             user: {
                 username: logedInUser.logedInUsername,
                 _id: logedInUser.logedInId
-            }
+            },
+            votes: {users: []}
         }
 
         //adding new issue for the back end 
@@ -118,14 +121,14 @@ export default function Political (props) {
             {issueState.map((issue) => {
                 return(
                     <div>
-                    <PoliticalIssuesComponent 
-                    key = {issue._id}
-                    issue = {issue}
-                    userId = {logedInUser.logedInId}
-                    />
-                </div>
-            )
-        })}
+                        <PoliticalIssuesComponent 
+                            // key = {issue._id}
+                            issue = {issue}
+                            userId = {logedInUser.logedInId}
+                        />
+                    </div>
+                )
+            })}
             </div>
         </div>
     )
