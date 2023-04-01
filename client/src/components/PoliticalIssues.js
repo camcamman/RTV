@@ -8,7 +8,9 @@ const initInputs = {newIssue: "", newDescription: "", votes:{users: []}}
 export default function Political (props) {
     const [issueState, setIssueState] = useState([])
     const [issueForm, setIssueForm] = useState(initInputs)
+
     const { addNewIssue } = useContext(MainContext)
+
     const logedInUser = {
         logedInUsername: JSON.parse(localStorage.getItem("user")).username,
         logedInId: JSON.parse(localStorage.getItem("user"))._id
@@ -26,7 +28,7 @@ export default function Political (props) {
         .then(res => {
             // console.log(res.data)
             res.data.map((theData) => {
-                // console.log(theData)
+                // console.log(votedUsersState)
                 setIssueState(prevState => {
                     return[
                         ...prevState,
@@ -38,6 +40,7 @@ export default function Political (props) {
         })
         .catch(err => console.error(err))
     }
+
 
     function handleChange (e) {
         const {name, value} = e.target
@@ -69,7 +72,7 @@ export default function Political (props) {
                 username: logedInUser.logedInUsername,
                 _id: logedInUser.logedInId
             },
-            votes: {users: []}
+            votedUsers: []
         }
 
         //adding new issue for the back end 
@@ -122,7 +125,7 @@ export default function Political (props) {
                 return(
                     <div>
                         <PoliticalIssuesComponent 
-                            // key = {issue._id}
+                            key = {issue._id}
                             issue = {issue}
                         />
                     </div>

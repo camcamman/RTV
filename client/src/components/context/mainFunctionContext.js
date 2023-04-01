@@ -33,7 +33,7 @@ export default function MainProvider (props) {
 
     function saveVotedUser (issueId, newVotedArry) {
         userAxios.put(`/issue/${issueId}`, newVotedArry)
-        .then(() => console.log("added"))
+        .then(res => console.log(res.data))
         .catch(err => console.error(err))
     }
 
