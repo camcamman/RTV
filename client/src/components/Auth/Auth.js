@@ -59,7 +59,7 @@ export default function Home () {
 
             </>
         }
-        <h1>6</h1>
+        <h1>7</h1>
         <h1>1</h1>
         </div>
     )

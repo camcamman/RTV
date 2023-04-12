@@ -5,39 +5,20 @@ import { MainContext } from "./context/mainFunctionContext";
 
 export default function PoliticalIssuesComponent (props) {
     const {issue, user, _id, description, voteNum, votedUsers} = props.issue
-    // const { handleNewVote, votedUsersStateIds } = props
-    // const userId = user._id
     const userId = JSON.parse(localStorage.getItem("user"))._id
     const { upVoteIssue, addComment, downVoteIssue, saveVotedUser } = useContext(MainContext)
     const [voteNumber, setVoteNumber] = useState(voteNum)
     const [comments, setComments] = useState([])
-    // const [votedUserState, setVotedUserState] = useState([])
     const [voted, setVoted] = useState(false)
 
 
     function hasUserVotedFunction () {
-        // const hasUserVoted = votedUsers.find((theId) => theId === userId)
-        // const hasUserVoted = votedUsers.find((theId) => {
-        //     console.log("theId")
-        //     console.log(theId)
-        //     console.log("userId")
-        //     console.log(userId)
-        //     return theId === 3
-        // })
-
         votedUsers.map(theUserId => {
-            console.log("theId")
-            console.log(theUserId)
-            console.log("userId")
-            console.log(userId)
             if (userId === theUserId) {
-                console.log("match")
+                setVoted(true)
+                return "nothing"
             }
         })
-
-        // if (hasUserVoted) {
-        //     setVoted(true)
-        // }
     }
 
 
@@ -87,13 +68,6 @@ export default function PoliticalIssuesComponent (props) {
 
     //up vote issue 
     function upVoteButton () {
-        // setVotedUserState(prevArr => {
-        //     return [
-        //         ...prevArr,
-        //         userId
-        //     ]
-        // })
-
         // handleNewVote(userId)
         let newVotedUserObj = {votedUsers: [...votedUsers, userId]}
         setVoted(true)
@@ -104,22 +78,11 @@ export default function PoliticalIssuesComponent (props) {
 
     //down vote issue
     function downVoteButton () {
-        // setVotedUserState(prevArr => {
-        //     return [
-        //         ...prevArr,
-        //         userId
-        //     ]
-        // })
-
-        // handleNewVote(userId)
-        // console.log(votedUserState)
-        // let newVotedUserObj = {votedUsers: votedUserState}
-        // let newVotedUserObj = {votedUsers: votedUsersStateIds}
         let newVotedUserObj = {votedUsers: [...votedUsers, userId]}
-        console.log(newVotedUserObj)
+        // console.log(newVotedUserObj)
         // console.log(...votedUsers)
-        console.log(votedUsers)
-        console.log(userId)
+        // console.log(votedUsers)
+        // console.log(userId)
         setVoted(true)
         downVoteIssue(_id)
         saveVotedUser(_id, newVotedUserObj)
