@@ -1,40 +1,43 @@
 import React from "react";
+// import "../../authForm.css";
+// import "../..styles/authForm.css";
+import "../../styles/authForm.css";
+// import ".../styles/authForm.css";
 
-export default function AuthForm (props) {
+export default function AuthForm(props) {
+  const {
+    handleChange,
+    buttonText,
+    handleSubmit,
+    inputs: { username, password },
+    errMsg,
+  } = props;
 
-    const {
-        handleChange,
-        buttonText,
-        handleSubmit,
-        inputs: {username, password},
-        errMsg
-    } = props
+  return (
+    <div className="auth-form-container">
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <input
+          className="auth-input"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={handleChange}
+          name="username"
+          required
+        />
 
-    return(
-        <>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="username"
-                    value={username}
-                    onChange={handleChange}
-                    name="username"
-                    required
-                >
-                </input>
-
-                <input
-                    type="text"
-                    placeholder="password"
-                    value={password}
-                    onChange={handleChange}
-                    name="password"
-                    required
-                >
-                </input>
-                <button> {buttonText} </button>
-            </form>
-            <p>{errMsg}</p>
-        </>
-    )
+        <input
+          className="auth-input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handleChange}
+          name="password"
+          required
+        />
+        <button className="auth-button">{buttonText}</button>
+      </form>
+      {errMsg && <p className="auth-error">{errMsg}</p>}
+    </div>
+  );
 }
