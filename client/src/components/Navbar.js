@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import '../styles/navBar.css'
 
 export default function Navbar(props){
   const { logout, navButtonText, changeButtonText } = props
@@ -10,6 +11,12 @@ export default function Navbar(props){
 
   return (
     <div className="navbar">
+
+      <Link to="/PoliticalIssues">
+        <button>See all issues</button>
+      </Link>
+
+
       <Link to="/">
         <button onClick={logout}>Logout</button>
         {/* <button>Logout</button> */}
@@ -19,9 +26,6 @@ export default function Navbar(props){
         <button>See my issues</button>
       </Link>
 
-      <Link to="/PoliticalIssues">
-        <button>See all issues</button>
-      </Link>
     </div>
   )
 }
