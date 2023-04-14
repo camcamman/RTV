@@ -1,0 +1,58 @@
+.political-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.political-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.political-form input {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.political-form input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.political-issues {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.political-issue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.political-issue h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.political-issue p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}

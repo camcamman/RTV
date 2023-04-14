@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../styles/commentForm.css'
 
 export default function CommentComponet (props) {
     // const initInputs = {comment: ""}
@@ -27,19 +28,16 @@ export default function CommentComponet (props) {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-           <input
-                    type="text"
-                    placeholder="comment"
-                    value={input}
-                    // onChange={handleChange}
-                    onChange={(e) => setInput(e.target.value)}
-                    name="comment"
-                    required
-                ></input>
-                <input
-                    type="submit"
-                ></input>
+        <form onSubmit={handleSubmit} className="comment-form">
+          <input
+            type="text"
+            placeholder="Add a comment"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            name="comment"
+            required
+          />
+          <input type="submit" value="Submit" />
         </form>
-    )
+      );      
 }

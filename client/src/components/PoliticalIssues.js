@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { MainContext } from "./context/mainFunctionContext";
 import PoliticalIssuesComponent from "./PoliticalIssuesComponent";
+import '../styles/politicalissue.css'
 
 const initInputs = {newIssue: "", newDescription: "", votes:{users: []}}
 
@@ -100,38 +101,38 @@ export default function Political (props) {
     filterVotes()
 
     return (
-        <div>
-            <div>
-                <form onSubmit={handleSumbit}>
-                    <input
-                        type="text"
-                        placeholder="New issue"
-                        name="newIssue"
-                        value={issueForm.newIssue}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        placeholder="New description"
-                        name="newDescription"
-                        value={issueForm.newDescription}
-                        onChange={handleChange}
-                    />
-                    <input type="submit"/>
-                </form>
-            </div>
-            <div>
+        <div className="political-container">
+          <div className="political-form">
+            <form onSubmit={handleSumbit}>
+              <input
+                type="text"
+                placeholder="New issue"
+                name="newIssue"
+                value={issueForm.newIssue}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                placeholder="New description"
+                name="newDescription"
+                value={issueForm.newDescription}
+                onChange={handleChange}
+              />
+              <input type="submit" value="Submit"/>
+            </form>
+          </div>
+          <div className="political-issues">
             {issueState.map((issue) => {
-                return(
-                    <div>
-                        <PoliticalIssuesComponent 
-                            key = {issue._id}
-                            issue = {issue}
-                        />
-                    </div>
-                )
+              return(
+                <div className="political-issue">
+                  <PoliticalIssuesComponent 
+                    key={issue._id}
+                    issue={issue}
+                  />
+                </div>
+              )
             })}
-            </div>
+          </div>
         </div>
-    )
+      )      
 }

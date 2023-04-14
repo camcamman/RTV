@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
 import { MainContext } from "./context/mainFunctionContext";
+import '../styles/PoliticalIssuesComponent.css'
 
 export default function PoliticalIssuesComponent (props) {
     const {issue, user, _id, description, voteNum, votedUsers} = props.issue
@@ -92,7 +93,7 @@ export default function PoliticalIssuesComponent (props) {
 
 
     return(
-        <div>
+        <div style={{textAlign: "center"}}>
             <p>{issue}</p>
             <p>{description}</p>
             <p>Posted by {user.username}</p>
@@ -102,7 +103,7 @@ export default function PoliticalIssuesComponent (props) {
             } else {
                 show buttons 
             }} */}
-            {voted 
+            {/* {voted 
                 ? 
                 <p>you can only vote once</p> 
                 : 
@@ -110,8 +111,20 @@ export default function PoliticalIssuesComponent (props) {
                     <button onClick={upVoteButton}>Up vote issue</button>
                     <button onClick={downVoteButton}>Down vote issue</button>
                 </div>
-            }
+            } */}
+            <div className="vote-buttons">
+    {voted 
+        ? 
+        <p>you can only vote once</p> 
+        : 
+        <div>
+            <button onClick={upVoteButton}>Up vote issue</button>
+            <button onClick={downVoteButton}>Down vote issue</button>
+        </div>
+    }
+</div>
 
+    
             {/* <button onClick={upVoteButton}>Up vote issue</button>
             <button onClick={downVoteButton}>Down vote issue</button> */}
             {/* <h1>Hello World</h1> */}
@@ -122,7 +135,7 @@ export default function PoliticalIssuesComponent (props) {
                 issueId = {_id}
                 key = {_id}
             />
-
+    
             {comments.map((theComment) => {
                 // console.log(theComment)
                 return(
@@ -131,9 +144,10 @@ export default function PoliticalIssuesComponent (props) {
                     </div>
                 )
             })}
-
+    
             <br/>
             <br/>
         </div>
     )
+    
 }
